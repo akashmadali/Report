@@ -1,0 +1,75 @@
+ // hobbyprojects // 08-05-2020 
+  38KHz_IR_Remote_Control_Transmitter.ino
+ 
+  #define toneOutput_pin 8
+  int key1 = 5;  //HR-
+  int key2 = 4;  //HR+ 
+  int key3 = 6;  //MIN- 
+  int key4 = 3;  //MIN+ 
+  int key5 = 7;  //SEC_RESET
+  int key6 = 2;  //Mode
+ 
+  int val;
+ void setup() 
+ {
+  pinMode(key1,INPUT_PULLUP);
+  pinMode(key2,INPUT_PULLUP);
+  pinMode(key3,INPUT_PULLUP);
+  pinMode(key4,INPUT_PULLUP); 
+  pinMode(key5,INPUT_PULLUP); 
+  pinMode(key6,INPUT_PULLUP); 
+
+  Serial.begin(1200); 
+  tone(toneOutput_pin, 38000);
+ }
+ void loop()
+ {
+   val = digitalRead(key1); 
+   while (val == LOW)
+   { 
+   Serial.print("1");
+   delay(250); 
+   val = digitalRead(key1);
+   } 
+   val = digitalRead(key2); 
+   while (val == LOW)
+   {
+   Serial.print("2"); 
+   delay(250); 
+   val = digitalRead(key2); 
+   }
+   val = digitalRead(key3);
+   while (val == LOW) 
+   { 
+   Serial.print("3");
+   delay(250);
+   val = digitalRead(key3);
+   } 
+   val = digitalRead(key4);
+   while (val == LOW)
+   { 
+   Serial.print("4");
+   delay(250);
+   val = digitalRead(key4);
+   } 
+   val = digitalRead(key5); 
+   if (val == LOW)
+   { 
+   Serial.print("5"); 
+   delay(250); 
+   while (val == LOW)
+   {
+   val = digitalRead(key5); 
+   } 
+   }
+   val = digitalRead(key6);
+   if (val == LOW) 
+   {  
+   Serial.print("6"); 
+   delay(250);
+   while (val == LOW) 
+   { 
+   val = digitalRead(key6);
+   } 
+   } 
+ }
